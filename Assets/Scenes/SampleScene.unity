@@ -1210,7 +1210,6 @@ GameObject:
   - component: {fileID: 1776366182}
   - component: {fileID: 1776366181}
   - component: {fileID: 1776366183}
-  - component: {fileID: 1776366184}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -1361,29 +1360,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888411b211921b441b32c3aa44a06c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  damage: 20
   moveSpeed: 2
   jumpSpeed: 450
   jumpFrequency: 0.1
   nextJumpTime: 5
+  attackSpeed: 1
+  attackFrequency: 1
+  nextAttackTime: 1
   isGrounded: 0
+  onAttack: 0
   groundCkeckPosition: {fileID: 741645848}
   groundCheckRadius: 0.1
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &1776366184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776366177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df444a5f944c63458b1f78001ab8835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!1001 &1878554842
 PrefabInstance:
   m_ObjectHideFlags: 0

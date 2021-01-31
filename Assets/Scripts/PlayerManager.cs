@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float health;
-    bool dead = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private float health;
+    private bool dead = false;
+    private float damage;
+  
     public void GetDamage(float damage)
     {
         if((health - damage) >= 0)
@@ -37,4 +28,27 @@ public class PlayerManager : MonoBehaviour
             dead = true;
         }
     }
+    public float getHealth()
+    {
+        return this.health;
+    }
+    public void setHealth(float health)
+    {
+        this.health = health;
+    }
+    public float getDamage()
+    {
+        return this.damage;
+    }
+    public void setDamage(float damage)
+    {
+        this.damage = damage;
+    }
+    public bool getAlive()
+    {
+        return this.dead;
+    }
+  
 }
+
+

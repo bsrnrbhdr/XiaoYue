@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerController : MonoBehaviour
+public class PlayerController : LivingThings
 {
     Rigidbody2D playerRB;
     Animator playerAnim;
@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 1f, jumpFrequency = 1f, nextJumpTime = 1f;
 
 
-    bool facingRight = true;
+    //bool facingRight = true;
     public bool isGrounded = false;
+    public bool onAttack = false;
     public Transform groundCkeckPosition;
     public float groundCheckRadius;
     public LayerMask groundCheckLayer;
@@ -32,11 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         HorizontalMove();
         onGroundCheck();
-        if (playerRB.velocity.x < 0 && facingRight)
+        if (playerRB.velocity.x < 0 && getFacingRight())
         {
             FlipFace();
         }
-        else if (playerRB.velocity.x > 0 && !facingRight)
+        else if (playerRB.velocity.x > 0 && !getFacingRight())
         {
             FlipFace();
         }
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
             nextJumpTime = Time.timeSinceLevelLoad + jumpFrequency;
             Jump();
         }
+        IsOnAttack();
+      
     }
 
     void HorizontalMove()
@@ -62,13 +65,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void FlipFace()
-    {
-        facingRight = !facingRight;
-        Vector3 tempLocalScale = transform.localScale;
-        tempLocalScale.x *= -1;
-        transform.localScale = tempLocalScale;
-    }
+  
 
     void Jump()
     {
@@ -79,5 +76,23 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCkeckPosition.position, groundCheckRadius, groundCheckLayer);
         playerAnim.SetBool("isOnGround", isGrounded);
+    }
+
+    void IsOnAttack()
+    {
+       
+        if (ScreenTouch.direction == "Attack")
+        {
+
+            onAttack = true;
+        }
+        else
+        {
+            onAttack = false;
+        }
+   
+         playerAnim.SetBool("onAttack", onAttack);
+      
+
     }
 }

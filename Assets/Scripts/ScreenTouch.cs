@@ -57,7 +57,7 @@ public class ScreenTouch : MonoBehaviour
                     else
                     {
                         // this is a long press or drag​
-                        direction = " ";
+                        direction = "Attack";
                     }
 
                 }

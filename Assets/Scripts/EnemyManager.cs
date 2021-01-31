@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : LivingThings
 {
-    public float health;
-    public float damage;
 
     bool colliderBusy = false;
     // Start is called before the first frame update
@@ -22,16 +20,27 @@ public class EnemyManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && !colliderBusy) {
+        if(collision.tag == "Player" && !colliderBusy && !collision.GetComponent<PlayerController>().onAttack) {
             colliderBusy = true;
-            collision.GetComponent<PlayerManager>().GetDamage(damage);
+            collision.GetComponent<PlayerController>().GetDamageFromEnemy(damage);
+        }
+        else if(collision.tag == "Player" && collision.GetComponent<PlayerController>().onAttack)
+        {
+            colliderBusy = true;
+            this.GetDamageFromEnemy(collision.GetComponent<PlayerController>().damage);
+            Debug.Log("dkjfhjks");
         }
        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+          if (collision.tag == "Player" && collision.GetComponent<PlayerController>().onAttack)
+        {
+            colliderBusy = true;
+            this.GetDamageFromEnemy(collision.GetComponent<PlayerController>().damage);
+            Debug.Log("dkjfhjks");
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
